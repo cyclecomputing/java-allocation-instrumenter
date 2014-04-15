@@ -175,7 +175,7 @@ public class ConstructorInstrumenter implements ClassFileTransformer {
             Opcodes.INVOKESTATIC,
             "com/google/monitoring/runtime/instrumentation/ConstructorInstrumenter",
             "invokeSamplers",
-            "(Ljava/lang/Object;)V");
+            "(Ljava/lang/Object;)V", false);
       }
       super.visitInsn(opcode);
     }
