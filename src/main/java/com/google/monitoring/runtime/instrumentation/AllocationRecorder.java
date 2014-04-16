@@ -18,15 +18,7 @@ package com.google.monitoring.runtime.instrumentation;
 
 import java.lang.instrument.Instrumentation;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
-
-import com.google.common.collect.ForwardingMap;
-import com.google.common.collect.MapMaker;
 
 /**
  * The logic for recording allocations, called from bytecode rewritten by
@@ -85,53 +77,7 @@ public class AllocationRecorder {
   private static final ThreadLocal<Boolean> recordingAllocation = new ThreadLocal<Boolean>();
 
   // Stores the object sizes for the last ~100000 encountered classes
-  private static final ForwardingMap<Class<?>, Long> classSizesMap = 
-    new ForwardingMap<Class<?>, Long>() {
-      private final ConcurrentMap<Class<?>, Long> map = new MapMaker()
-          .weakKeys()
-          .makeMap();
-
-      @Override public Map<Class<?>, Long> delegate() {
-        return map;
-      }
-
-      // The approximate maximum size of the map
-      private static final int MAX_SIZE = 100000;
-
-      // The approximate current size of the map; since this is not an AtomicInteger
-      // and since we do not synchronize the updates to this field, it will only be
-      // an approximate size of the map; it's good enough for our purposes though,
-      // and not synchronizing the updates saves us some time
-      private int approximateSize = 0;
-
-      @Override
-      public Long put(Class<?> key, Long value) {
-        // if we have too many elements, delete about 10% of them
-        // this is expensive, but needs to be done to keep the map bounded
-        // we also need to randomize the elements we delete: if we remove the same
-        // elements all the time, we might end up adding them back to the map
-        // immediately after, and then remove them again, then add them back, etc.
-        // which will cause this expensive code to be executed too often
-        if (approximateSize >= MAX_SIZE) {
-          for (Iterator<Class<?>> it = keySet().iterator(); it.hasNext(); ) {
-            it.next();
-            if (Math.random() < 0.1) {
-              it.remove();
-            }
-          }
-
-          // get the exact size; another expensive call, but we need to correct
-          // approximateSize every once in a while, or the difference between
-          // approximateSize and the actual size might become significant over time;
-          // the other solution is synchronizing every time we update approximateSize,
-          // which seems even more expensive
-          approximateSize = size();
-        }
-
-        approximateSize++;
-        return super.put(key, value);
-    }
-  };
+  private static final BoundedMap<Class<?>, Long> classSizesMap = new BoundedMap<Class<?>, Long>(131072, 0.75);
 
   /**
    * Adds a {@link Sampler} that will get run <b>every time an allocation is
