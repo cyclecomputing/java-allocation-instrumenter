@@ -329,7 +329,7 @@ class AllocationMethodAdapter extends MethodVisitor {
           // -> stack: ... newobj
           super.visitTypeInsn(Opcodes.CHECKCAST, owner);
           // -> stack: ... arrayref
-          calculateArrayLengthAndDispatch(owner.substring(i), i);
+          calculateArrayLengthAndDispatch(owner, i);
         } else {
           // -> stack: ... newobj
           super.visitInsn(Opcodes.DUP);
@@ -340,7 +340,7 @@ class AllocationMethodAdapter extends MethodVisitor {
           // -> stack: ... newobj length
           super.visitInsn(Opcodes.SWAP);
           // -> stack: ... length newobj
-          invokeRecordAllocation(owner.substring(i));
+          invokeRecordAllocation(owner);
         }
         return;
       } else if ("newInstance".equals(name)) {
@@ -510,8 +510,11 @@ class AllocationMethodAdapter extends MethodVisitor {
   // post: stack: ... newobj
   private void invokeRecordAllocation(String typeName) {
     Matcher matcher = namePattern.matcher(typeName);
-    if (matcher.find())
+    if (matcher.find()) {
         typeName = matcher.group(1);
+    } else {
+        typeName = prettyArrayTypeName(typeName);
+    }
 
     // stack: ... count newobj
     super.visitInsn(Opcodes.DUP_X1);
@@ -591,6 +594,29 @@ class AllocationMethodAdapter extends MethodVisitor {
     super.visitInsn(Opcodes.SWAP); // -> stack: ... origaref product aref0
     super.visitInsn(Opcodes.POP); // -> stack: ... origaref product
     super.visitInsn(Opcodes.SWAP); // -> stack: ... product origaref
+
     invokeRecordAllocation(typeName);
+  }
+
+  // sometimes we catch array allocations and see the internal Java name,
+  // (e.g. when cloned). This forces a consistent typeName.
+  private String prettyArrayTypeName(String rawName) {
+      if (rawName.endsWith("[B"))
+          return "byte";
+      if (rawName.endsWith("[C"))
+          return "char";
+      if (rawName.endsWith("[Z"))
+          return "boolean";
+      if (rawName.endsWith("[J"))
+          return "long";
+      if (rawName.endsWith("[D"))
+          return "double";
+      if (rawName.endsWith("[I"))
+          return "int";
+      if (rawName.endsWith("[F"))
+          return "float";
+      if (rawName.endsWith("[S"))
+          return "short";
+      return rawName;
   }
 }
