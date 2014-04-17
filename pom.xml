@@ -141,6 +141,10 @@
                         <archive>
                             <manifestEntries>
                                 <Premain-Class>com.google.monitoring.runtime.instrumentation.AllocationInstrumenter</Premain-Class>
+                                <Boot-Class-Path>java-allocation-instrumenter-${project.version}-jar-with-dependencies.jar</Boot-Class-Path>
+                                <Can-Redefine-Classes>true</Can-Redefine-Classes>
+                                <Can-Retransform-Classes>true</Can-Retransform-Classes>
+                                <Main-Class>NotSuitableAsMain</Main-Class>
                             </manifestEntries>
                         </archive>
                     </configuration>
