@@ -168,6 +168,8 @@ public class AllocationInstrumenter implements ClassFileTransformer {
    */
   public static byte[] instrument(byte[] originalBytes, String recorderClass,
       String recorderMethod, ClassLoader loader) {
+    Boolean wasRecording = AllocationRecorder.recordingAllocation.get();
+    AllocationRecorder.recordingAllocation.set(Boolean.TRUE);
     try {
       ClassReader cr = new ClassReader(originalBytes);
       // The verifier in JDK7 requires accurate stackmaps, so we use
@@ -189,6 +191,8 @@ public class AllocationInstrumenter implements ClassFileTransformer {
     } catch (Error e) {
       logger.log(Level.WARNING, "Failed to instrument class.", e);
       throw e;
+    } finally {
+      AllocationRecorder.recordingAllocation.set(wasRecording);
     }
   }
 
