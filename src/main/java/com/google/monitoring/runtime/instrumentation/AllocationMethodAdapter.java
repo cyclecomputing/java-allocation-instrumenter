@@ -110,7 +110,7 @@ class AllocationMethodAdapter extends MethodVisitor {
    */
   public AllocationMethodAdapter(MethodVisitor mv, String recorderClass,
                          String recorderMethod) {
-    super(Opcodes.ASM4, mv);
+    super(Opcodes.ASM5, mv);
     this.recorderClass = recorderClass;
     this.recorderMethod = recorderMethod;
   }
@@ -267,7 +267,7 @@ class AllocationMethodAdapter extends MethodVisitor {
         super.visitInsn(Opcodes.SWAP);
         // -> stack: ... newobj count className newobj
         super.visitMethodInsn(Opcodes.INVOKESTATIC, recorderClass,
-                              recorderMethod, RECORDER_SIGNATURE, isf);
+                              recorderMethod, RECORDER_SIGNATURE, false);
         // -> stack: ... newobj
         return;
       } else if (signature.equals("(Ljava/lang/Class;[I)Ljava/lang/Object;")){
@@ -308,7 +308,7 @@ class AllocationMethodAdapter extends MethodVisitor {
         super.visitInsn(Opcodes.SWAP);
         // -> stack: ... newobj product className newobj
         super.visitMethodInsn(Opcodes.INVOKESTATIC, recorderClass,
-                              recorderMethod, RECORDER_SIGNATURE, isf);
+                              recorderMethod, RECORDER_SIGNATURE, false);
         // -> stack: ... newobj
         return;
       }
@@ -354,7 +354,7 @@ class AllocationMethodAdapter extends MethodVisitor {
           // -> stack: ... newobj Class newobj
           super.visitMethodInsn(Opcodes.INVOKESTATIC,
               recorderClass, recorderMethod,
-              CLASS_RECORDER_SIG, isf);
+              CLASS_RECORDER_SIG, false);
           // -> stack: ... newobj
           return;
         } else if ("java/lang/reflect/Constructor".equals(owner) &&

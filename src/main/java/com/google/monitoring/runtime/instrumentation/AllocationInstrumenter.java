@@ -82,6 +82,8 @@ public class AllocationInstrumenter implements ClassFileTransformer {
     // this class.
     try {
       Class.forName("sun.security.provider.PolicyFile");
+      Class.forName("java.util.ResourceBundle");
+      Class.forName("java.util.Date");
     } catch (Throwable t) {
       // NOP
     }
