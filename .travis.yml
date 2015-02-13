@@ -1,0 +1,26 @@
+language: java
+
+jdk:
+  - openjdk6
+
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.m2
+
+env:
+  global:
+    # travis encrypt -r fommil/java-allocation-instrumenter SONATYPE_USERNAME=<USERNAME>
+    # travis encrypt -r fommil/java-allocation-instrumenter SONATYPE_PASSWORD=<PASSWORD>
+    # travis encrypt -r fommil/java-allocation-instrumenter COVERALLS_TOKEN=<TOKEN>
+  - secure: "GyqJqzEevCbt219I+Cg36gu+QyrnZEBqlJbEj0XAYY6SZa75klDETsayYlpntKZhcXSW6WEBqHzBd2YJfUI/1Q0pQL00AbpKfNfn/8RmxmTf/m5ggHPupafTUzyr4qpnNfB4DV8+GFd63xl/YnlRu5OcVZMX0yFE1vxwJf8Tp30="
+  - secure: "MJoLEQv/czD3Nm7Ya10WW4Fmk6+bhnyzNvQxGaF68Lss/526cgRhdeVf815TQ+T2fsIpx/k043GXyBHXZ3sNhmcx/jL1MG4SMUHfrUlHqE25VuKXimdc2EXZo8O3+PONSFiNnGMl1BVg4jLLzJiPvRPoem+feV2YxGXlNt7qGPk="
+  - secure: "hP9PmI4gHw7lTKuRc2as9eWZi9560Bl8mQvSg3jOvnDkNJVpe0b1DN+0eJINZ+NiZwCphU2v38lEIuwYTRsBWO/C5MWfrKw6jsbpDSO5dH1nVsPRoGZ+vTgV7sDkCMtNzhv91nW83/6yfeqhqqlDg+HRGvtC+Ghi8usV9muN+NA="
+  
+script:
+  - mvn javadoc:javadoc test && mvn java-formatter:format && ./.check-diff.sh && mvn clean cobertura:cobertura
+
+after_success:
+  - mvn coveralls:report -DrepoToken=$COVERALLS_TOKEN
+  - mvn clean --settings .settings.xml -Dmaven.test.skip=true $(if [[ "$TRAVIS_PULL_REQUEST" == "false" ]]; then echo "deploy"; fi)

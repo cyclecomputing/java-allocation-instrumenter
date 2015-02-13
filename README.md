@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/fommil/java-allocation-instrumenter.svg?branch=master)](https://travis-ci.org/fommil/java-allocation-instrumenter)
+[![Coverage Status](https://coveralls.io/repos/fommil/java-allocation-instrumenter/badge.svg?branch=master)](https://coveralls.io/r/fommil/java-allocation-instrumenter?branch=master)
+
 java-allocation-instrumenter
 ============================
 
@@ -13,3 +16,4 @@ My snapshots are distributed on Sonatype's Snapshot Repository:
   <version>2.2-SNAPSHOT</version>
 </dependency>
 ```
+

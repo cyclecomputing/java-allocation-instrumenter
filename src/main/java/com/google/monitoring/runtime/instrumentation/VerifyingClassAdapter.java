@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  * {@link ClassWriter}, and verifies properties of the class getting written.
  * 
  * Currently, it only checks to see if the methods are of the correct length
- * for Java methods (<64K).
+ * for Java methods (&lt;64K).
  * 
  * @author jeremymanson@google.com (Jeremy Manson)
  */
