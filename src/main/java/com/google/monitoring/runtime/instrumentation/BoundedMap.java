@@ -31,7 +31,7 @@ public class BoundedMap<K, V> {
             // expensive, but keeps the map bounded
             // randomness avoids spinning on add/delete (to a certain extent)
             Random random = RANDOM.get();
-            for (Iterator<K> it = delegate.keySet().iterator(); it.hasNext(); ) {
+            for (Iterator<K> it = delegate.keySet().iterator(); it.hasNext();) {
                 it.next();
                 if (random.nextDouble() < 0.1) {
                     it.remove();
