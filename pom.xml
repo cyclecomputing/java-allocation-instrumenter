@@ -3,14 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
+      <groupId>com.cyclecomputing.modules</groupId>
+      <artifactId>maven_config</artifactId>
+      <version>22</version>
     </parent>
 
-    <groupId>com.github.fommil</groupId>
+    <groupId>com.cyclecomputing</groupId>
     <artifactId>java-allocation-instrumenter</artifactId>
-    <!-- mvn deploy -Psonatype-oss-release -->
     <version>3.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
@@ -18,7 +17,7 @@
     <description>
         Java agent that rewrites bytecode to instrument allocation sites
     </description>
-    <url>https://github.com/fommil/java-allocation-instrumenter/</url>
+    <url>https://github.com/cyclecomputing/java-allocation-instrumenter/</url>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -42,6 +41,11 @@
             <id>fommil</id>
             <email>sam.halliday@gmail.com</email>
         </developer>
+        <developer>
+            <name>Doug Clayton</name>
+            <organization>Cycle Computing</organization>
+            <email>dclayton@cyclecomputing.com</email>
+        </developer>
     </developers>
 
     <prerequisites>
@@ -49,42 +53,15 @@
     </prerequisites>
 
     <scm>
-        <url>https://github.com/fommil/java-allocation-instrumenter</url>
-        <connection>scm:git:git@github.com:fommil/java-allocation-instrumenter.git</connection>
-        <developerConnection>scm:git:git@github.com:fommil/java-allocation-instrumenter.git</developerConnection>
+        <url>https://github.com/cyclecomputing/java-allocation-instrumenter</url>
+        <connection>scm:git:git@github.com:cyclecomputing/java-allocation-instrumenter.git</connection>
+        <developerConnection>scm:git:git@github.com:cyclecomputing/java-allocation-instrumenter.git</developerConnection>
     </scm>
-    <issueManagement>
-        <system>Google Code Issue Tracking</system>
-        <url>http://code.google.com/p/java-allocation-instrumenter/issues/list</url>
-    </issueManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <projectAsmVersion>5.0.3</projectAsmVersion>
     </properties>
-
-    <repositories>
-        <repository>
-            <id>sonatype-snapshots</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>sonatype-releases</id>
-            <url>https://oss.sonatype.org/content/repositories/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
     <!-- mvn versions:display-dependency-updates -->
     <dependencies>
