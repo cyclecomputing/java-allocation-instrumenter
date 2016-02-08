@@ -10,7 +10,7 @@
 
     <groupId>com.cyclecomputing</groupId>
     <artifactId>java-allocation-instrumenter</artifactId>
-    <version>3.1-SNAPSHOT</version>
+    <version>3.1</version>
     <packaging>jar</packaging>
 
     <name>Java Allocation Instrumenter</name>
