@@ -16,12 +16,12 @@
 
 package com.google.monitoring.runtime.instrumentation;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.commons.LocalVariablesSorter;
+import privateorg.objectweb.asm.ClassReader;
+import privateorg.objectweb.asm.ClassVisitor;
+import privateorg.objectweb.asm.ClassWriter;
+import privateorg.objectweb.asm.MethodVisitor;
+import privateorg.objectweb.asm.Opcodes;
+import privateorg.objectweb.asm.commons.LocalVariablesSorter;
 
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;

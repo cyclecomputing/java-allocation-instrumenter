@@ -16,11 +16,11 @@
 
 package com.google.monitoring.runtime.instrumentation;
 
-import org.objectweb.asm.Label;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-import org.objectweb.asm.commons.LocalVariablesSorter;
+import privateorg.objectweb.asm.Label;
+import privateorg.objectweb.asm.MethodVisitor;
+import privateorg.objectweb.asm.Opcodes;
+import privateorg.objectweb.asm.Type;
+import privateorg.objectweb.asm.commons.LocalVariablesSorter;
 
 import java.util.LinkedList;
 import java.util.List;

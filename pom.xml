@@ -71,21 +71,6 @@
             <version>1.16.2</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm-analysis</artifactId>
-            <version>${projectAsmVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm-commons</artifactId>
-            <version>${projectAsmVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ow2.asm</groupId>
-            <artifactId>asm-xml</artifactId>
-            <version>${projectAsmVersion}</version>
-        </dependency>
     </dependencies>
 
     <!-- mvn versions:display-plugin-updates -->

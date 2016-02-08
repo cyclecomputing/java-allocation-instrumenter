@@ -16,10 +16,6 @@
 
 package com.google.monitoring.runtime.instrumentation;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.Instrumentation;
 import java.lang.instrument.UnmodifiableClassException;
@@ -29,6 +25,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import privateorg.objectweb.asm.ClassReader;
+import privateorg.objectweb.asm.ClassVisitor;
+import privateorg.objectweb.asm.ClassWriter;
 
 /**
  * Instruments bytecodes that allocate heap memory to call a recording hook.

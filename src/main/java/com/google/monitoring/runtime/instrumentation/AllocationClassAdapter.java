@@ -2,11 +2,11 @@
 
 package com.google.monitoring.runtime.instrumentation;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.commons.LocalVariablesSorter;
-import org.objectweb.asm.commons.JSRInlinerAdapter;
+import privateorg.objectweb.asm.ClassVisitor;
+import privateorg.objectweb.asm.MethodVisitor;
+import privateorg.objectweb.asm.Opcodes;
+import privateorg.objectweb.asm.commons.JSRInlinerAdapter;
+import privateorg.objectweb.asm.commons.LocalVariablesSorter;
 
 /**
  * Instruments bytecodes that allocate heap memory to call a recording hook. A

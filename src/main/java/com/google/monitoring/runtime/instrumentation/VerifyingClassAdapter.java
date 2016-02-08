@@ -16,11 +16,11 @@
 
 package com.google.monitoring.runtime.instrumentation;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.commons.CodeSizeEvaluator;
+import privateorg.objectweb.asm.ClassVisitor;
+import privateorg.objectweb.asm.ClassWriter;
+import privateorg.objectweb.asm.MethodVisitor;
+import privateorg.objectweb.asm.Opcodes;
+import privateorg.objectweb.asm.commons.CodeSizeEvaluator;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

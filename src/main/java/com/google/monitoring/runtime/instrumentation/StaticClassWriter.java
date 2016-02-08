@@ -37,12 +37,13 @@
 
 package com.google.monitoring.runtime.instrumentation;
 
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.Type;
-
 import java.io.InputStream;
+
+import privateorg.objectweb.asm.ClassReader;
+import privateorg.objectweb.asm.ClassWriter;
+import privateorg.objectweb.asm.Opcodes;
+import privateorg.objectweb.asm.Type;
+
 import java.io.IOException;
 
 /**
@@ -59,7 +60,7 @@ import java.io.IOException;
  * 
  * <p>
  * This class was heavily influenced by ASM's
- * org.objectweb.asm.util.ClassWriterComputeFramesTest, which contains the same
+ * privateorg.objectweb.asm.util.ClassWriterComputeFramesTest, which contains the same
  * logic in a subclass. The code here has been slightly cleaned up for
  * readability.
  * 
