@@ -185,26 +185,31 @@ public class AllocationRecorder {
             recordingAllocation.set(Boolean.TRUE);
         }
 
-        // NB: This could be smaller if the defaultSampler were merged with the
-        // optional samplers. However, you don't need the optional samplers in
-        // the common case, so I thought I'd save some space.
-        if (instrumentation != null) {
-            // calling getObjectSize() could be expensive,
-            // so make sure we do it only once per object
-            long objectSize = -1;
-
-            Sampler[] samplers = additionalSamplers;
-            if (samplers != null) {
-                if (objectSize < 0) {
-                    objectSize = getObjectSize(newObj, (count >= 0));
-                }
-                for (Sampler sampler : samplers) {
-                    sampler.sampleAllocation(count, desc, newObj, objectSize);
-                }
-            }
+        try
+        {
+	        // NB: This could be smaller if the defaultSampler were merged with the
+	        // optional samplers. However, you don't need the optional samplers in
+	        // the common case, so I thought I'd save some space.
+	        if (instrumentation != null) {
+	            // calling getObjectSize() could be expensive,
+	            // so make sure we do it only once per object
+	            long objectSize = -1;
+	
+	            Sampler[] samplers = additionalSamplers;
+	            if (samplers != null) {
+	                if (objectSize < 0) {
+	                    objectSize = getObjectSize(newObj, (count >= 0));
+	                }
+	                for (Sampler sampler : samplers) {
+	                    sampler.sampleAllocation(count, desc, newObj, objectSize);
+	                }
+	            }
+	        }
         }
-
-        recordingAllocation.set(Boolean.FALSE);
+	    finally
+	    {
+	    	recordingAllocation.set(Boolean.FALSE);
+	    }
     }
 
     /**
